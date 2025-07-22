@@ -239,3 +239,7 @@ function init(){
   $$("button,input").forEach(el=>el.setAttribute("tabindex","0"));
 }
 document.addEventListener("DOMContentLoaded",init);
+
+if ("serviceWorker" in navigator) {
+    navigator.serviceWorker.register("./sw.js");
+}
