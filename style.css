@@ -1,0 +1,115 @@
+/* ───────── 色・レイアウト ───────── */
+:root{
+  --light-bg:#f5f7fa; --light-card:#fff;   --light-text:#333; --light-sub:#666;
+  --light-border:#e0e0e0; --light-preset:#e9ecef; --light-preset-hover:#dee2e6;
+
+  --dark-bg:#121212;  --dark-card:#1e1e1e; --dark-text:#e0e0e0; --dark-sub:#9e9e9e;
+  --dark-border:#424242; --dark-preset:#333; --dark-preset-hover:#444;
+
+  --accent:#4caf50;  --danger:#f44336;
+}
+[data-theme="light"]{
+  --bg:var(--light-bg);   --card:var(--light-card);   --text:var(--light-text);
+  --sub:var(--light-sub); --border:var(--light-border);
+  --preset:var(--light-preset); --preset-hover:var(--light-preset-hover);
+}
+[data-theme="dark"]{
+  --bg:var(--dark-bg);   --card:var(--dark-card);   --text:var(--dark-text);
+  --sub:var(--dark-sub); --border:var(--dark-border);
+  --preset:var(--dark-preset); --preset-hover:var(--dark-preset-hover);
+}
+*{box-sizing:border-box}
+body{
+  margin:0;padding:24px;font-family:"Helvetica Neue",Arial,"Hiragino Kaku Gothic ProN","Hiragino Sans",Meiryo,sans-serif;
+  background:var(--bg);color:var(--text);display:flex;flex-direction:column;align-items:center;gap:24px;
+  transition:.3s background,.3s color;
+}
+.header{width:100%;max-width:520px;display:flex;justify-content:space-between;align-items:center}
+h1{margin:0;font-size:1.5rem}
+.theme-switch{background:none;border:none;padding:4px}
+.theme-icon{width:24px;height:24px;fill:var(--text);cursor:pointer}
+
+.card{
+  background:var(--card);border-radius:16px;box-shadow:0 4px 12px rgba(0,0,0,.08);
+  padding:20px;width:100%;max-width:520px;transition:.3s background;
+}
+h3{margin:0 0 16px;border-bottom:1px solid var(--border);padding-bottom:8px;font-size:1.05rem}
+button{cursor:pointer;transition:.2s}
+
+/* 1️⃣ 共通ボタン骨格 */
+.utility-btn{
+  padding:8px 16px;border-radius:8px;font-weight:700;
+  border:1px solid var(--btn-border,var(--accent));
+  background:none;color:var(--btn-text,var(--accent));
+  transition:.2s;
+}
+.utility-btn:hover{
+  background:var(--btn-bg-hover,var(--accent));
+  color:var(--btn-hover-text,#fff);
+}
+
+#toggleBtn{
+  font-size:1.1rem;font-weight:700;padding:14px 0;border-radius:10px;border:none;color:#fff;width:100%
+}
+
+.preset-container{display:flex;gap:8px;flex-wrap:wrap}
+.preset-btn{
+  background:var(--preset);border:none;border-radius:20px;padding:8px 14px;font-size:.9rem;color:var(--text);user-select:none
+}
+.preset-btn:hover{background:var(--preset-hover)}
+.preset-btn[draggable=true]{cursor:grab}
+.preset-btn.dragging{opacity:.4}
+
+#taskInput{
+  padding:12px 16px;font-size:1rem;border-radius:10px;border:1px solid var(--border);
+  width:100%;background:var(--bg);color:var(--text)
+}
+#taskInput:focus{border-color:var(--accent);outline:0}
+#timerDisplay{text-align:center;font:2.5rem 'Courier New',monospace;letter-spacing:2px}
+
+#logTable{width:100%;border-collapse:collapse;font-size:.85rem;margin-top:16px}
+#logTable th,#logTable td{border:1px solid var(--border);padding:8px;text-align:left}
+#logTable th{background:var(--preset)}
+.log-actions button{background:none;border:none;padding:4px;opacity:.6}
+.log-actions button:hover{opacity:1}
+
+#reportOutput{
+  width:100%;height:150px;font:0.8rem monospace;padding:8px;border:1px solid var(--border);
+  border-radius:8px;background:var(--bg);color:var(--text)
+}
+.report-controls input{
+  padding:8px;font-size:.9rem;border:1px solid var(--border);border-radius:8px;background:var(--bg);color:var(--text)
+}
+.button-group{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.card-footer{text-align:right;margin-top:16px}
+
+@media(max-width:420px){
+  body{padding:12px}
+  .card{padding:16px}
+  h1{font-size:1.25rem}
+  #timerDisplay{font-size:2rem}
+}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+/* ───────── モーダル ───────── */
+.modal{
+  position:fixed;inset:0;display:none;align-items:center;justify-content:center;
+  background:#0008;z-index:999
+}
+.modal.show{display:flex}
+.modal-box{
+  background:var(--card);color:var(--text);padding:24px;border-radius:12px;
+  width:90%;max-width:400px;box-shadow:0 6px 20px rgba(0,0,0,.2);
+  display: flex;
+  flex-direction: column;
+}
+.modal-btns button:first-child { margin-left: 0; }
+.modal-box h4{margin-top:0}
+.modal-row{margin:12px 0;display:flex;flex-direction:column}
+.modal-row label{font-size:.9rem;margin-bottom:4px}
+.modal-row input, .modal-row textarea{
+  padding:8px;border:1px solid var(--border);border-radius:8px;
+  background:var(--bg);color:var(--text)
+}
+.modal-btns{margin-top:18px;text-align:right}
+.modal-btns button{margin-left:8px}

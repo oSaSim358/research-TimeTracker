@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ja" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<title>研究タイムトラッカー v3.7</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="header">
+  <h1>研究タイムトラッカー</h1>
+  <button class="theme-switch" id="themeSwitch" aria-label="テーマ切替">
+    <svg id="theme-icon-sun" class="theme-icon" viewBox="0 0 24 24"><path d="M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zM2 13h2c.55 0 1-.45 1-1s-.45-1-1-1H2c-.55 0-1 .45-1 1s.45 1 1 1zm18 0h2c.55 0 1-.45 1-1s-.45-1-1-1h-2c-.55 0-1 .45-1 1s.45 1 1 1zM11 2v2c0 .55.45 1 1 1s1-.45 1-1V2c0-.55-.45-1-1-1s-1 .45-1 1zm0 18v2c0 .55.45 1 1 1s1-.45 1-1v-2c0-.55-.45-1-1-1s-1 .45-1 1z"/></svg>
+    <svg id="theme-icon-moon" class="theme-icon" viewBox="0 0 24 24" style="display:none"><path d="M11.1 12.08c-2.33-4.51-.5-8.48.53-10.07C6.27 2.2 1.98 6.59 1.98 12c0 5.52 4.48 10 10 10 3.91 0 7.25-2.24 8.94-5.45-.96.22-1.95.35-3 .35-4.6 0-8.33-3.55-9.82-7.82z"/></svg>
+  </button>
+</header>
+
+<div class="card controls">
+  <div id="presetContainer" class="preset-container" aria-label="プリセットタスク"></div>
+  <input id="taskInput" type="text" placeholder="作業内容を入力" aria-label="作業内容">
+  <div id="timerDisplay" aria-live="polite">00:00:00</div>
+  <button id="toggleBtn">開始</button>
+</div>
+
+<div class="card">
+  <h3>週次レポート生成</h3>
+  <div class="report-controls">
+    <input type="date" id="reportStart"><span>〜</span><input type="date" id="reportEnd">
+  </div>
+  <div class="button-group">
+    <button class="utility-btn" id="btnGenerate">🧮 集計</button>
+    <button class="utility-btn" id="btnCopy">📋 コピー</button>
+  </div>
+  <textarea id="reportOutput" readonly></textarea>
+</div>
+
+<div class="card">
+  <h3>作業ログ</h3>
+  <table id="logTable">
+    <thead><tr><th>日付</th><th>作業</th><th>時間(分)</th><th>操作</th></tr></thead>
+    <tbody></tbody>
+  </table>
+  <div class="card-footer">
+    <button class="utility-btn" id="btnEditPresets">⚙️ プリセット編集</button>
+  </div>
+</div>
+
+<div id="modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="modal-box">
+    <h4 id="modalTitle">編集</h4>
+
+    <div class="modal-row">
+      <label>作業内容 <small>(プリセット編集時は1行=1タスク)</small></label>
+      <textarea id="modalTask" rows="4" style="resize:vertical"></textarea>
+    </div>
+
+    <div class="modal-row" id="modalSecRow">
+      <label>作業時間 (秒)</label>
+      <input id="modalSec" type="number" min="0">
+    </div>
+
+    <div class="modal-btns">
+      <button class="utility-btn secondary" id="modalCancel">キャンセル</button>
+      <button class="utility-btn" id="modalOK">保存</button>
+    </div>
+  </div>
+</div>
+
+<script src="main.js"></script>
+</body>
+</html>
